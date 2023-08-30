@@ -20,7 +20,7 @@ const CategoryOptions = [
     {value: 2, label:'Music'},
     {value: 3, label:'Pets & Animals'},
 ]
-function VideoUploadPage() {
+function VideoUploadPage(props) {
     const user = useSelector(state => state.user)
     //리덕스의 state에서 userfmf 가져옴, user의 모든 정보가 담겨 있음
     const [VideoTitle, setVideoTitle] = useState("")
@@ -53,7 +53,7 @@ function VideoUploadPage() {
 
         Axios.post('/api/video/uploadfiles', formData, config)
             .then(response => {
-                if(response.data.success){
+                if(response.data.success){     
                     console.log(response.data)
                 } else{
                     alert('업로드 실패')
@@ -74,6 +74,12 @@ function VideoUploadPage() {
         Axios.post('/api/video/uploadVideo', variables)
             .then(response=>{
                 if(response.data.success){
+                    
+                    message.success('성공적으로 업로드')   
+                    setTimeout(()=>{
+                        props.history.push('/')                    
+                    }, 3000)        
+                    //3초 뒤 실행이라 3000붙임       
                     console.log(response.data)
                 } else {
                     alert('업로드에 실패했습니다.')
