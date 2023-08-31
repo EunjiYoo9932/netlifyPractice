@@ -28,8 +28,11 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage}).single("file");
 
 
+//=================================
+//             User
+//=================================
 
-router.post('/uploadfiles', (req, res) =>{
+router.post("/uploadfiles", (req, res) =>{
     //비디오를 서버에 저장한다.
     upload(req, res, err => {
         if(err){
@@ -41,6 +44,7 @@ router.post('/uploadfiles', (req, res) =>{
 });
 //index.js에 먼저가서 /api/video를 거친 후 video.js로 온다 따라서 /api/video빼도 된다.
 
+
 router.post('/uploadVideo', (req, res) =>{
     //비디오 정보 저장
     const video = new Video(req.body)
@@ -51,6 +55,18 @@ router.post('/uploadVideo', (req, res) =>{
     //몽고 db에 저장하는 코드
         if(err) return res.json({success: false, err})
         res.status(200).json({success : true})
+    })
+});
+
+
+router.get('/getVideos', (req, res) =>{
+    //비디오를 db에서 가져와서 클라이언트에 보낸다.
+    Video.find()
+    .populate('writer')
+    //populate해줘야 모든 정보를 가져올 수 있다.
+    .exec((err, videos)=> {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({success: true, videos})
     })
 });
 module.exports = router;

@@ -8,7 +8,7 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> Happy Coding  <Icon type="smile" /></p>
+        <p> 중부대학교 정보보호학전공  <Icon type="smile" /></p>
         </div>
     )
 }
