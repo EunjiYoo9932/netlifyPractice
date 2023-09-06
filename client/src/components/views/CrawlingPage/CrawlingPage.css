@@ -1,0 +1,16 @@
+.crawlingResult{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.crawlingForm{
+}
+.crawlingButton{
+    
+    background-color: #c0eb75;
+    
+}
+
+.store{
+
+}
